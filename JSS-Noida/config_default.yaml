@@ -1,0 +1,84 @@
+
+# Default configuration for AI-powered Research Paper Analyzer
+# Copy this to config.yaml and customize with your API keys
+
+# OpenAI Configuration
+openai:
+  api_key: ${OPENAI_API_KEY}  # Set via environment variable
+  default_model: "gpt-3.5-turbo"  # or "gpt-4", "gpt-4-turbo-preview"
+  max_tokens: 2000
+  timeout: 60
+  retry_attempts: 3
+  retry_delay: 1
+
+# Anthropic Configuration  
+anthropic:
+  api_key: ${ANTHROPIC_API_KEY}  # Set via environment variable
+  default_model: "claude-3-sonnet-20240229"  # or "claude-3-opus-20240229", "claude-3-haiku-20240307"
+  max_tokens: 2000
+  timeout: 60
+  retry_attempts: 3
+  retry_delay: 1
+
+# Local Model Configuration (e.g., Ollama, LocalAI, etc.)
+local:
+  endpoint: ${LOCAL_LLM_ENDPOINT}  # e.g., "http://localhost:11434/api/generate"
+  default_model: "llama2"  # or your local model name
+  max_tokens: 2000
+  timeout: 120
+  headers:
+    Content-Type: "application/json"
+    Authorization: "Bearer ${LOCAL_LLM_API_KEY}"  # if required
+  retry_attempts: 2
+  retry_delay: 2
+
+# Analysis Configuration
+analysis:
+  # Default provider priority (first available will be used)
+  provider_priority:
+    - "openai"
+    - "anthropic" 
+    - "local"
+  
+  # Temperature settings for different phases
+  sense_temperature: 0.3    # Lower for consistent metadata extraction
+  plan_temperature: 0.4     # Slightly higher for creative planning
+  act_temperature: 0.3      # Lower for consistent analysis
+  
+  # Token limits for different phases
+  sense_max_tokens: 3000
+  plan_max_tokens: 2500
+  act_max_tokens: 2000
+  assessment_max_tokens: 2000
+  recommendations_max_tokens: 1500
+  
+  # Analysis behavior
+  max_paper_length: 50000   # Maximum paper length to process
+  enable_fallback: true     # Enable fallback to rule-based analysis if AI fails
+  save_llm_responses: false # Save raw LLM responses for debugging
+  
+# Logging Configuration
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  save_logs: true
+  log_file: "analysis_logs.txt"
+  console_output: true
+  show_llm_reasoning: true  # Show LLM reasoning in output
+
+# Cost Management
+cost_management:
+  enable_cost_tracking: true
+  max_cost_per_analysis: 1.00  # Maximum cost in USD per analysis
+  warn_cost_threshold: 0.50    # Warn when cost exceeds this threshold
+  
+# Rate Limiting
+rate_limiting:
+  requests_per_minute: 60
+  enable_rate_limiting: true
+  
+# Error Handling
+error_handling:
+  max_retries: 3
+  retry_delay: 1
+  fallback_to_rule_based: true
+  continue_on_task_failure: true

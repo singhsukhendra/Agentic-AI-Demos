@@ -1,0 +1,15 @@
+[07/25/25 10:49:20] ERROR    ❌ Failed to initialize AI pipeline: No LLM        
+                             providers available. Please configure at least one
+                             provider.
+                    INFO     Falling back to rule-based mode
+╭──────────────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  AGENTIC AI RESEARCH PAPER ANALYZER                                          │
+│  Demonstrating Sense-Plan-Act Cycle                                          │
+│                                                                              │
+│  Timestamp: 2025-07-25 10:49:20                                              │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+                    ERROR    ❌ Paper file not found: ../sample_data/paper1.txt
+                    ERROR    ❌ No paper text provided
